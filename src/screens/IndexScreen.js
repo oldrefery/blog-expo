@@ -1,9 +1,9 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React from 'react';
+import { Text, View } from 'react-native';
 
 const IndexScreen = () => (
   <View>
-    <Text>1Index Screen</Text>
+    <Text>Index Screen</Text>
   </View>
 );
 
