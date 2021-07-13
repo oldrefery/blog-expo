@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
-import { Button, FlatList, Text, View } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
 import { Context } from '../context/BlogContext';
+import { Ionicons } from '@expo/vector-icons';
 
 const IndexScreen = () => {
   const { state: blogPosts, addBlogPost } = useContext(Context);
 
   const renderItem = ({ item }) => {
     return (
-      <View>
-        <Text>{item.title}</Text>
+      <View style={styles.blogItem}>
+        <Text style={styles.title}>{item.title}</Text>
+        <Ionicons name={'ios-trash'} style={styles.icon} />
       </View>
     );
   };
@@ -23,5 +25,21 @@ const IndexScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  blogItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderTopWidth: 1,
+    borderColor: 'grey',
+    padding: 10,
+  },
+  title: {
+    fontSize: 18,
+  },
+  icon: {
+    fontSize: 24,
+  },
+});
 
 export default IndexScreen;
