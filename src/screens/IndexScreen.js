@@ -3,17 +3,20 @@ import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-nativ
 import { Context } from '../context/BlogContext';
 import { Ionicons } from '@expo/vector-icons';
 
-const IndexScreen = () => {
+const IndexScreen = ({ navigation }) => {
   const { state: blogPosts, addBlogPost, deleteBlogPost } = useContext(Context);
 
   const renderItem = ({ item }) => {
     return (
-      <View style={styles.blogItem}>
+      <Pressable
+        style={styles.blogItem}
+        onPress={() => navigation.navigate('Show', { id: item.id })}
+      >
         <Text style={styles.title}>{item.title}</Text>
         <Pressable onPress={() => deleteBlogPost(item.id)}>
           <Ionicons name={'ios-trash'} style={styles.icon} />
         </Pressable>
-      </View>
+      </Pressable>
     );
   };
 
