@@ -31,6 +31,16 @@ const IndexScreen = ({ navigation }) => {
   );
 };
 
+IndexScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerRight: () => (
+      <Pressable style={styles.create} onPress={() => navigation.navigate('Create')}>
+        <Ionicons name="add" size={30} />
+      </Pressable>
+    ),
+  };
+};
+
 const styles = StyleSheet.create({
   blogItem: {
     flexDirection: 'row',
@@ -44,6 +54,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 24,
+  },
+  create: {
+    paddingRight: 10,
   },
 });
 
