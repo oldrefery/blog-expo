@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Context } from '../context/BlogContext';
 import { Ionicons } from '@expo/vector-icons';
 
 const IndexScreen = ({ navigation }) => {
-  const { state: blogPosts, addBlogPost, deleteBlogPost } = useContext(Context);
+  const { state: blogPosts, deleteBlogPost } = useContext(Context);
 
   const renderItem = ({ item }) => {
     return (
@@ -24,8 +24,6 @@ const IndexScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text>Index Screen</Text>
-      <Button title={'Add new blog post'} onPress={addBlogPost} />
       <FlatList data={blogPosts} renderItem={renderItem} keyExtractor={keyExtractor} />
     </View>
   );
