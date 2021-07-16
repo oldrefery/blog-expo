@@ -18,9 +18,14 @@ const ShowScreen = ({ navigation }) => {
 };
 
 ShowScreen.navigationOptions = ({ navigation }) => {
+  const id = navigation.getParam('id');
+  const handleEdit = () => {
+    navigation.navigate('Edit', { id });
+  };
+
   return {
     headerRight: () => (
-      <Pressable onPress={() => navigation.navigate('Edit')} style={styles.editIcon}>
+      <Pressable onPress={handleEdit} style={styles.editIcon}>
         <Ionicons name="pencil" size={25} />
       </Pressable>
     ),
