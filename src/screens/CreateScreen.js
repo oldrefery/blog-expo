@@ -8,8 +8,11 @@ const CreateScreen = ({ navigation }) => {
   const [content, setContent] = useState('');
 
   const handleClickAdd = () => {
-    addBlogPost(title, content);
-    navigation.pop();
+    const callback = () => {
+      navigation.pop();
+    };
+
+    addBlogPost(title, content, callback);
   };
 
   return (
