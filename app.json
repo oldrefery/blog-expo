@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Simple blog application. There is the list of all blogPost in main screen. You can add new blogpost (title and content), edit, and delete. Use Context and Navigation",
+    "githubUrl": "https://github.com/oldrefery/blog-expo"
   }
 }
