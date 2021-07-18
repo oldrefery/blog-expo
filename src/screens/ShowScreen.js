@@ -10,9 +10,9 @@ const ShowScreen = ({ navigation }) => {
   const blogPost = state.find((el) => el.id === id);
 
   return (
-    <View>
-      <Text>{blogPost.title}</Text>
-      <Text>{blogPost.content}</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>{blogPost.title}</Text>
+      <Text style={styles.content}>{blogPost.content}</Text>
     </View>
   );
 };
@@ -35,6 +35,17 @@ ShowScreen.navigationOptions = ({ navigation }) => {
 const styles = StyleSheet.create({
   editIcon: {
     paddingRight: 10,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  content: {
+    fontSize: 18,
+  },
+  container: {
+    padding: 10,
   },
 });
 
