@@ -1,13 +1,11 @@
-import React, { useContext, useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useContext } from 'react';
 import { Context } from '../context/BlogContext';
+import BlogPostForm from '../components/BlogPostForm';
 
 const CreateScreen = ({ navigation }) => {
   const { addBlogPost } = useContext(Context);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
 
-  const handleClickAdd = () => {
+  const handleClickAdd = (content, title) => {
     const callback = () => {
       navigation.pop();
     };
@@ -15,35 +13,7 @@ const CreateScreen = ({ navigation }) => {
     addBlogPost(title, content, callback);
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Enter Title:</Text>
-      <TextInput value={title} onChangeText={(newText) => setTitle(newText)} style={styles.input} />
-      <Text style={styles.label}>Enter Content:</Text>
-      <TextInput
-        value={content}
-        onChangeText={(newText) => setContent(newText)}
-        style={styles.input}
-      />
-      <Button title={'Add Blog Post'} onPress={handleClickAdd} />
-    </View>
-  );
+  return <BlogPostForm onSubmit={handleClickAdd} />;
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 10,
-  },
-  input: {
-    fontSize: 18,
-    borderWidth: 1,
-    marginBottom: 15,
-    padding: 5,
-  },
-  label: {
-    fontSize: 20,
-    marginBottom: 5,
-  },
-});
 
 export default CreateScreen;
