@@ -5,15 +5,6 @@ const blogReducer = (state, action) => {
   switch (action.type) {
     case 'get_blogposts':
       return action.payload;
-    case 'add_blogpost':
-      return [
-        ...state,
-        {
-          title: action.payload.title,
-          content: action.payload.content,
-          id: Math.floor(Math.random() * 99999),
-        },
-      ];
     case 'delete_blogpost':
       return state.filter((blogPost) => blogPost.id !== action.payload);
     case 'edit_blogpost':
@@ -26,34 +17,48 @@ const blogReducer = (state, action) => {
 };
 
 const getBlogPosts = (dispatch) => {
-  return async () => {
-    const response = await jsonServer.get('/blogposts');
-
-    dispatch({ type: 'get_blogposts', payload: response.data });
+  return () => {
+    jsonServer
+      .get('/blogposts')
+      .then((res) => dispatch({ type: 'get_blogposts', payload: res.data }))
+      .catch((e) => console.log(e));
   };
 };
 
-const addBlogPost = (dispatch) => {
+const addBlogPost = () => {
   return (title, content, callback) => {
-    dispatch({ type: 'add_blogpost', payload: { title, content } });
-    if (callback) {
-      callback();
-    }
+    jsonServer
+      .post('/blogposts', { title, content })
+      .then(() => {
+        if (callback) {
+          callback();
+        }
+      })
+      .catch((e) => console.log(e));
   };
 };
 
 const deleteBlogPost = (dispatch) => {
   return (id) => {
-    dispatch({ type: 'delete_blogpost', payload: id });
+    jsonServer
+      .delete(`/blogposts/${id}`)
+      .then(() => {
+        dispatch({ type: 'delete_blogpost', payload: id });
+      })
+      .catch((e) => console.log(e));
   };
 };
 
-const editBlogPost = (dispatch) => {
-  return (blogPost, callback) => {
-    dispatch({ type: 'edit_blogpost', payload: blogPost });
-    if (callback) {
-      callback();
-    }
+const editBlogPost = () => {
+  return ({ id, title, content }, callback) => {
+    jsonServer
+      .put(`/blogposts/${id}`, { title, content })
+      .then(() => {
+        if (callback) {
+          callback();
+        }
+      })
+      .catch((e) => console.log(e));
   };
 };
 
